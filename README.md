@@ -13,7 +13,7 @@
 &nbsp;
 
 ### 1. Overview
-**Hub E** model is designed without a Network Firewall while ensuring that all incoming traffic is routed through the DMZ/Public Load Balancer subnet. This approach allows the central network team to maintain control over traffic flow and enforce security using Security Lists, NSGs, or WAF (for HTTP/S traffic).
+**Hub E** model is designed without a Network Firewall while ensuring that all incoming traffic is routed through the DMZ/Public Load Balancer public subnet. This approach allows the central network team to maintain control over traffic flow and enforce security using Security Lists, NSGs, and WAF (for HTTP/S traffic), while also managing and controlling East-West traffic communication between Spoke VCNs through DRG route tables.
 It is recommended for environments where deep packet inspection is not a security requirement, as well as for proof-of-concept (PoC) deployments and Hub & Spoke architecture exploration.
 
 <img src="images/hub_e_design.png" width="250" height="value">
@@ -34,10 +34,9 @@ It is recommended for environments where deep packet inspection is not a securit
 &nbsp;
 
 ### 3. Specifications and Considerations
-- Inbound traffic first enters the Public Load Balancer's subnet and is then routed through the DRG to the respective backends in the Spoke VCNs.
+- Inbound traffic first enters the Public Load Balancer's public subnet and is then routed through the DRG to the respective LB's backends in the Spoke VCNs.
 - Each Spoke VCN has its own NAT Gateway for outbound traffic.
 - East-West traffic between Spoke VCNs is routed through the DRG.
-
 
 <br>
 
